@@ -59,9 +59,15 @@ def clone_remote(repository):
         call(["git", "remote", "add", "origin", repository])
         call(["git", "fetch"])
         call(["git", "reset", "--hard", "origin/master"])
+        call(["git", "branch", "--set-upstream-to", "origin/master"])
         call(["git", "submodule", "update", "--init", "--recursive"])
     else:
         print("Repository already checked out.")
+
+
+def setup_git():
+    call(["git", "config", "--global", "user.email", "git-hassio@git-hassio"])
+    call(["git", "config", "--global", "user.name", "git-hassio"])
 
 
 def check_remote():
@@ -69,7 +75,14 @@ def check_remote():
 
 
 def check_local():
-    call(["git", "status", "--porcelain"])
+    if check_output(["git", "status", "--porcelain"]):
+        call(["git", "add", "-A"])
+        call(["git", "commit", "-m", "Auto commit from hassio-git"])
+    else:
+        print("No local changes.")
+
+    if "branch is ahead" in check_output(["git", "status", "--ahead-behind"]).decode(sys.stdout.encoding):
+        call(["git", "push"])
 
 
 def update_from_remote():
@@ -79,9 +92,10 @@ def update_from_remote():
 
 options = load_options()
 setup_ssh()
+setup_git()
 
 clone_remote(options['repository'])
 
 while True:
-    print("hello")
+    check_local()
     time.sleep(10)
