@@ -1,8 +1,8 @@
 {
-  "name": "Hello world",
-  "version": "1",
-  "slug": "hello_world",
-  "description": "My first real add-on!",
+  "name": "Hassio GIT",
+  "version": "0.0.1",
+  "slug": "hassio_git",
+  "description": "Hassio Git Addon",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "startup": "before",
   "boot": "auto",

@@ -1,5 +1,8 @@
 FILEPATH := $(PWD)
 
+run: build-mock
+	docker run hassio-git-mock
+
 shell: build-mock
 	docker run -v $(FILEPATH)/data:/data -v $(FILEPATH)/../hassio-git/run.py:/opt/run.py -it hassio-git-mock /bin/ash
 

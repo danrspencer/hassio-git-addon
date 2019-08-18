@@ -8,6 +8,8 @@ COPY run.py /opt
 RUN chmod a+x /opt/run.py
 
 RUN mkdir ~/.ssh
+COPY ./ssh/config ~/.ssh/config
+
 
 WORKDIR /opt
 
