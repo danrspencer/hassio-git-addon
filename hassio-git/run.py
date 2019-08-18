@@ -2,8 +2,9 @@
 
 import json
 import os
-import yaml
 import sys
+import time
+import yaml
 
 import subprocess
 from subprocess import call, check_output
@@ -58,11 +59,29 @@ def clone_remote(repository):
         call(["git", "remote", "add", "origin", repository])
         call(["git", "fetch"])
         call(["git", "reset", "--hard", "origin/master"])
+        call(["git", "submodule", "update", "--init", "--recursive"])
     else:
         print("Repository already checked out.")
+
+
+def check_remote():
+    call(["git", "fetch"])
+
+
+def check_local():
+    call(["git", "status", "--porcelain"])
+
+
+def update_from_remote():
+    call(["git", "submodule", "update", "--init", "--recursive"])
+    # hass -c . --script check_config
 
 
 options = load_options()
 setup_ssh()
 
 clone_remote(options['repository'])
+
+while True:
+    print("hello")
+    time.sleep(10)
