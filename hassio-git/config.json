@@ -6,6 +6,18 @@
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "startup": "before",
   "boot": "auto",
-  "options": {},
-  "schema": {}
+  "options": {
+    "auto-revert": false,
+    "auto-update": true,
+    "auto-resert": true,
+    "git-repo": "",
+    "ssh": ""
+  },
+  "schema": {
+    "auto-revert": "bool",
+    "auto-update": "bool",
+    "auto-resert": "bool",
+    "git-repo": "str",
+    "ssh": "str"
+  }
 }

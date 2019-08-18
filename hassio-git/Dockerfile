@@ -9,4 +9,6 @@ RUN chmod a+x /opt/run.py
 
 RUN mkdir ~/.ssh
 
-CMD [ /opt/run.py ]
+WORKDIR /opt
+
+CMD /opt/run.py

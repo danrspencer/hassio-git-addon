@@ -1,3 +1,4 @@
 {
-  "deployment_key": "!secret git_ssh"
+  "deployment_key": "!secret git_ssh",
+  "repository": "git@github.com:danrspencer/hass-config.git"
 }
