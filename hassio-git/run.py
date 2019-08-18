@@ -12,9 +12,6 @@ config_path = "/config"
 options_path = "/data/options.json"
 secrets_path = "/config/secrets.yaml"
 
-ssh_key_path = "/root/.ssh/id_rsa"
-known_hosts_path = "/root/.ssh/known_hosts"
-
 
 def load_options():
     with open(options_path, 'r') as stream:
@@ -25,6 +22,9 @@ def load_options():
 
 
 def setup_ssh():
+    ssh_key_path = "/root/.ssh/id_rsa"
+    known_hosts_path = "/root/.ssh/known_hosts"
+
     with open(secrets_path, 'r') as stream:
         try:
             secrets = yaml.safe_load(stream)
@@ -56,7 +56,8 @@ def clone_remote(repository):
         print("Checking out {}".format(repository))
         call(["git", "init"])
         call(["git", "remote", "add", "origin", repository])
-        call(["git", "pull", "origin", "master"])
+        call(["git", "fetch"])
+        call(["git", "reset", "--hard", "origin/master"])
     else:
         print("Repository already checked out.")
 
